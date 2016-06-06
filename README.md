@@ -3,10 +3,6 @@ PotatoScript is a simple general programming language. Write a .tater script to 
 
 
 # Specification
-
-if, while loops, function declaration, variables, functions are first class citizen, objects x = {one: "hello", two: "world"}
-
-
 primitive types:
  - Bool 
  - Number
@@ -17,40 +13,46 @@ structural types:
  - Map
  - List
 
-Linked list:
-  `[value|-]->[value|-]->[value|-]->[value|-]->[value|null]`
-
 ```
+If statement:
 if conditional-expression then
   expression1
 else 
   expression2
 
+Switch statement:
+switch expression
+ | expression1 -> output-expression1
+ | expression2 -> output-expression2
+ | otherwise -> default-expression
+
+Function declaration:
 function sum(n) = expression
 
-expression = 
+Expressions = 
  {expression}
+ (expression)
  let (bindings) in expression
  if-statement
+ switch-statement
  function call
  binary expressions (+ - / * ** && || == =/= < > <= >=)
  unary expression (- not)
 
+Stateful operations:
 do
   statements
 done
 
-statement
+Statement:
   assignment: set line1 to readLine()
-  function call:
+  function call: writeLine('I love taters')
 
-
-function double(arg1, arg2, arg3) = expression
-
+Let bindings:
 function add8and12 = {
   let (
-    double4 = double(4);
-    double6 = double(6);
+    double4 = double(4)
+    double6 = double(6)
   ) in {
     double4 + double6;
   }

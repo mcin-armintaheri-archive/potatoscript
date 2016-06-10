@@ -1,5 +1,5 @@
 import ply.lex as lex
-# import ply.yacc as yacc
+import ply.yacc as yacc
 
 reserved = {
     'if': 'IF',
@@ -23,7 +23,7 @@ tokens += ['LBRACKET', 'RBRACKET', 'POUND', 'COLON']
 tokens += ['PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'POWER', 'EQASSIGN']
 tokens += ['AND', 'OR', 'NOT']
 tokens += ['EQ', 'NOTEQ', 'LT', 'GT', 'LTEQ', 'GTEQ']
-tokens += ['SEMI', 'BAR']
+tokens += ['SEMI', 'COMMA', 'BAR']
 tokens += ['CHAR', 'STRING', 'NUMBER']
 
 t_LARROW = r'\<-'
@@ -40,17 +40,18 @@ t_MINUS = r'-'
 t_DIVIDE = r'\/'
 t_TIMES = r'\*'
 t_POWER = r'\*\*'
-t_EQASSIGN = r'==='
+t_EQASSIGN = r'='
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_NOT = r'!'
-t_EQ = r'='
-t_NOTEQ = r'!='
+t_EQ = r'==='
+t_NOTEQ = r'!=='
 t_LT = r'\<'
 t_GT = r'\>'
 t_LTEQ = r'\<='
 t_GTEQ = r'\>='
 t_SEMI = r';'
+t_COMMA = r','
 t_BAR = r'\|'
 
 def t_SYMBOL(t):
@@ -91,11 +92,61 @@ t_ignore = ' \t'
 
 lexer = lex.lex()
 
+precedences = (
+    ('left', 'PLUS', 'MINUS', 'OR'),
+    ('left', 'DIVIDE', 'TIMES', 'AND'),
+    ('left', 'POWER'),
+    ('right', 'UMINUS', 'NOT')
+)
+
+def p_empty(p):
+    'empty :'
+    pass
+
+def p_program(p):
+    """
+    program : empty
+            | function_dec_list
+    """
+    pass
+
+def p_function_dec_list(p):
+    """
+    function_dec_list : function_dec SEMI
+                      | function_dec SEMI function_dec_list
+    """
+    pass
+
+def p_function_dec(p):
+    """
+    function_dec : FUNCTION LPAREN argument_def_list RPAREN EQASSIGN expression
+    """
+    pass
+
+def p_argument_def_list():
+    """
+    argument_def_list : SYMBOL
+                      | SYMBOL argument_def_list_tail
+    """
+    pass
+def p_argument_def_list_tail(p):
+    """
+    argument_def_list_tail : empty
+                           | COMMA argument_def_list
+    """
+    pass
+
 #TEST
 def test():
     data = """
         "hi Potato!"
         should_not_fail
+    """
+
+    parser_input = """
+        function (x,y,z) = expression;
+        function (i,j,k) = expression;
+        function (hallo) = hallo;
     """
     lexer.input(data)
 

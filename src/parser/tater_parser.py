@@ -123,7 +123,7 @@ def p_function_dec(p):
     """
     pass
 
-def p_argument_def_list():
+def p_argument_def_list(p):
     """
     argument_def_list : SYMBOL
                       | SYMBOL argument_def_list_tail
@@ -133,6 +133,67 @@ def p_argument_def_list_tail(p):
     """
     argument_def_list_tail : empty
                            | COMMA argument_def_list
+    """
+    pass
+
+
+def p_expression(p):
+    """
+    expression :
+    """
+    pass
+
+def binary_expression(p):
+    """
+    binary_expression :
+    """
+    pass
+
+def unary_expression(p):
+    """
+    unary_expression :
+    """
+    pass
+
+def expression_atom(p):
+    """
+    expression_atom :
+    """
+    pass
+
+def function_call_expression(p):
+    """
+    function_call_expression :
+    """
+    pass
+
+def if_expression(p):
+    """
+    if_expression :
+    """
+    pass
+
+def switch_expression(p):
+    """
+    switch_expression :
+    """
+    pass
+
+def let_expression(p):
+    """
+    let_expression :
+    """
+    pass
+
+def literal_value(p):
+    """
+    literal_value :
+    """
+    pass
+
+def do_block(p):
+    """
+    do_block :
     """
     pass
 

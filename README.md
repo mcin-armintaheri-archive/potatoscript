@@ -32,7 +32,6 @@ Function declaration:
 function sum(n) = expression;
 
 Expressions = 
- {expression}
  (expression)
  let (bindings) in expression
  if-statement
@@ -40,6 +39,14 @@ Expressions =
  function call
  binary expressions (+ - / * ** && || == =/= < > <= >=)
  unary expression (- not)
+
+Values:
+ bool: true, false
+ number: 44.2, 3
+ character: 'a'
+ string: "hello potaters"
+ list: [1,'c',"taterrrrs"]
+ map: {STRING: expression, STRING: expression}
 
 Stateful operations:
 do
@@ -55,8 +62,6 @@ function add8and12 = {
   let (
     double4 = double(4);
     double6 = double(6);
-  ) in {
-    double4 + double6;
-  };
+  ) in double4 + double6;
 };
 ```
